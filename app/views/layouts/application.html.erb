@@ -15,7 +15,6 @@
         <li><%= link_to "Home", root_path %></li>
         <% if user_signed_in? %>
           <li class="pull-right"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-          <!-- <li class="pull-right"><%= current_user.email %></li> -->
           <li class="pull-right"><%= link_to "#{current_user.username}", edit_user_registration_path %></li>
         <% else %>
           <li class="pull-right"><%= link_to "Sign In", new_user_session_path %></li>
