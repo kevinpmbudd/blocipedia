@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'random_data'
+
+10.times do
+  User.create!(
+    username: RandomData.username,
+    email: RandomData.email,
+    password: RandomData.password
+  )
+end
+
+member = User.create!(
+  username: 'Member User',
+  email: 'member@example.com',
+  password: 'helloworld'
+)
+
+puts "#{User.count} users created"
