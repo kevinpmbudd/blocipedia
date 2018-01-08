@@ -28,6 +28,8 @@ gem 'devise'
 
 gem 'figaro', '1.0'
 
+gem 'pundit'
+
 
 group :development do
  # Use sqlite3 as the development database for Active Record
@@ -45,7 +47,8 @@ group :development, :test do
 end
 
 group :test do
-  gem "nyan-cat-formatter"
+  gem 'nyan-cat-formatter'
+  gem 'pundit-matchers', '~> 1.4.1'
 end
 
 group :production do

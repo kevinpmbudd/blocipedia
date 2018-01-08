@@ -1,7 +1,13 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1><%= @wiki.title %></h1>
-    <p><%= @wiki.body %></p>
+    <small>
+      submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.username %>
+    </small>
+    <div class="media">
+      <p><%= @wiki.body %></p>
+    </div>
+
     <% if user_signed_in? %>
       <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-info' %>
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger',data: { confirm: 'Delete this wiki?' } %>
