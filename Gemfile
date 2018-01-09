@@ -30,6 +30,8 @@ gem 'figaro', '1.0'
 
 gem 'pundit'
 
+gem 'faker'
+
 
 group :development do
  # Use sqlite3 as the development database for Active Record
