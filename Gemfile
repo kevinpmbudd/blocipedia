@@ -32,6 +32,8 @@ gem 'pundit'
 
 gem 'faker'
 
+gem 'stripe'
+
 
 group :development do
  # Use sqlite3 as the development database for Active Record

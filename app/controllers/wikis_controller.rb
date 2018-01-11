@@ -17,13 +17,19 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new( wiki_params )
     @wiki.user = current_user
-    authorize @wiki
-    if @wiki.save
-      flash[:notice] = "Wiki was successfully created"
-      redirect_to @wiki
+
+    if @wiki.private && current_user.standard?
+      flash[:alert] = "You must have a Premium membership to create private wikis."
+      redirect_to new_charge_path
     else
-      flash.now[:alert] = "Wiki creation unsuccessful. Try again."
-      render :new
+      authorize @wiki
+      if @wiki.save
+        flash[:notice] = "Wiki was successfully created"
+        redirect_to @wiki
+      else
+        flash.now[:alert] = "Wiki creation unsuccessful. Try again."
+        render :new
+      end
     end
   end
 

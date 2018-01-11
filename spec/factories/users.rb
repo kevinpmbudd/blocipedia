@@ -5,5 +5,6 @@ FactoryBot.define do
     sequence(:email){|n| "user#{n}@blocipedia_factory.edu" }
     password pw
     password_confirmation pw
+    confirmed_at Time.now.utc
   end
 end

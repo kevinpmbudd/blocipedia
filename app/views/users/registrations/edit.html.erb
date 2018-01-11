@@ -43,14 +43,14 @@
         </div>
       <% end %>
     </div>
-    <div class="col-md-3 text-center">
+    <div class="col-md-5 text-center">
       <% if current_user.standard? %>
         <h3>Upgrade to Premium</h3>
         <p><%= link_to "Upgrade to premium", new_charge_path, class: 'btn btn-success' %></p>
       <% end %>
       <% if current_user.premium? %>
         <h3>Downgrade to Standard</h3>
-
+        <%= link_to "Downgrade to standard", downgrade_path, data: { confirm: "Are you sure?" }, class: 'btn btn-danger', method: :post %>
       <% end %>
       <h3>Cancel my account</h3>
       <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>

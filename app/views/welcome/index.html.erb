@@ -4,7 +4,11 @@
   <div class="jumbotron">
     <h3 class="jumbo-header">Create and share Markdown Wikis</h3>
     <p>
-      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+      <% if user_signed_in? %>
+        <%= link_to "Wikis", wikis_path, class: 'btn btn-primary btn-lg' %>
+      <% else %>
+        <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+      <% end %>
     </p>
   </div>
 
@@ -12,13 +16,21 @@
     <div class="col-md-6">
       <h5 class="plan-tagline">Create as many public wikis as you want!</h5>
       <p>
-        <%= link_to "Free", '#', class: 'btn btn-primary btn-lg' %>
+        <% if user_signed_in? %>
+          <%= link_to "Profile", edit_user_registration_path, class: 'btn btn-primary btn-lg' %>
+        <% else %>
+          <%= link_to "Free", new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+        <% end %>
       </p>
     </div>
     <div class="col-md-6">
       <h5 class="plan-tagline">Create private wikis!</h5>
       <p>
-        <%= link_to "Premium", '#', class: 'btn btn-primary btn-lg' %>
+        <% if current_user.standard? %>
+          <%= link_to "Premium", new_charge_path , class: 'btn btn-primary btn-lg' %>
+        <% else %>
+          <%= link_to "New Wiki", new_wiki_path , class: 'btn btn-primary btn-lg'%>
+        <% end %>
       </p>
     </div>
   </div>

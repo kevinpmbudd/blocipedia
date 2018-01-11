@@ -10,7 +10,7 @@
 
     <% if user_signed_in? %>
       <%= link_to "Edit Wiki", edit_wiki_path, class: 'btn btn-info' %>
-      <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger',data: { confirm: 'Delete this wiki?' } %>
+      <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Delete this wiki?' } %>
     <% end %>
   </div>
 </div>

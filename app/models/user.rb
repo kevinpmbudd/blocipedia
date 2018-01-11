@@ -4,6 +4,10 @@ class User < ApplicationRecord
 
   def set_default_role
     self.role ||= :standard
+  end
+
+  def downgrade_role
+    self.role = :standard
   end 
 
   has_many :wikis, dependent: :destroy

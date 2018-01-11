@@ -20,9 +20,9 @@ member = User.create!(
 )
 users = User.all
 
-33.times do
+6.times do
   Wiki.create!(
-    title: Faker::Hipster.sentence,
+    title: Faker::Beer.unique.style,
     body: Faker::Hipster.paragraph,
     private: false,
     user: users.sample

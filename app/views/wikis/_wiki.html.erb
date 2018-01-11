@@ -1,7 +1,8 @@
-<div class="media">
-  <div class="media-body">
-    <h4 class="media-heading">
-      <%= link_to wiki.title, wiki %>
-    </h4>
-  </div>
-</div>
+<tr>
+  <td><%= link_to wiki.title, wiki %></td>
+  <% if user_signed_in? %>
+    <td class="text-center"><%= link_to "edit", edit_wiki_path(wiki) %></td>
+    <td class="text-center"><%= link_to "delete", wiki, method: :delete, data: { confirm: 'Delete this wiki?' } %></td>
+    <td class="text-center"><i class="glyphicon glyphicon-star-empty"> </i></td>
+  <% end %>
+</tr>
