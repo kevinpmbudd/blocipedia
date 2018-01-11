@@ -40,6 +40,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def downgrade
     current_user.update_attribute(:role, "standard")
+    @wikis = Wiki.where(user: current_user)
+    @wikis.each { |wiki| wiki.update_attribute(:private, false) }
     redirect_back(fallback_location: :root)
   end
 

@@ -26,7 +26,7 @@
     <div class="col-md-6">
       <h5 class="plan-tagline">Create private wikis!</h5>
       <p>
-        <% if current_user.standard? %>
+        <% if current_user && current_user.standard? %>
           <%= link_to "Premium", new_charge_path , class: 'btn btn-primary btn-lg' %>
         <% else %>
           <%= link_to "New Wiki", new_wiki_path , class: 'btn btn-primary btn-lg'%>

@@ -31,8 +31,19 @@ class WikiPolicy < ApplicationPolicy
   end
 
   class Scope < Scope
+    attr_reader :user, :scope
+
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
     def resolve
-      scope
+      if user.admin? || user.premium?
+        scope.all
+      else
+        scope.where(private: false)
+      end
     end
   end
 end

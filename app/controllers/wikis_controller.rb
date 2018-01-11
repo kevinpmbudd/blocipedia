@@ -1,8 +1,9 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user,  except: [:index, :show], if: :private_wiki?
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -18,18 +19,13 @@ class WikisController < ApplicationController
     @wiki = Wiki.new( wiki_params )
     @wiki.user = current_user
 
-    if @wiki.private && current_user.standard?
-      flash[:alert] = "You must have a Premium membership to create private wikis."
-      redirect_to new_charge_path
+    authorize @wiki
+    if @wiki.save
+      flash[:notice] = "Wiki was successfully created"
+      redirect_to @wiki
     else
-      authorize @wiki
-      if @wiki.save
-        flash[:notice] = "Wiki was successfully created"
-        redirect_to @wiki
-      else
-        flash.now[:alert] = "Wiki creation unsuccessful. Try again."
-        render :new
-      end
+      flash.now[:alert] = "Wiki creation unsuccessful. Try again."
+      render :new
     end
   end
 
@@ -68,5 +64,16 @@ class WikisController < ApplicationController
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
+  end
+
+  def private_wiki?
+    @wiki && @wiki.private
+  end
+
+  def authorize_user
+    unless current_user.admin? || current_user.premium?
+      flash[:alert] = "You must have a Premium membership to create private wikis."
+      redirect_to new_charge_path
+    end
   end
 end
