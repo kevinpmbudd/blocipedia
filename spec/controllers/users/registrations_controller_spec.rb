@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Users::RegistrationsController, type: :controller do
   let(:user) { create(:user) }
-  let(:wiki) { create(:wiki, private: true, user: user) }
+  let(:wiki) { create(:wiki, private: true, user_id: user.id) }
 
   context "premium user" do
     before do
@@ -13,12 +13,13 @@ RSpec.describe Users::RegistrationsController, type: :controller do
 
     describe "POST downgrade" do
       it "updates the users role to standard" do
-        expect{ post :downgrade }.to change { user.role }.to("standard")
+        post :downgrade 
+        expect(user.reload.role).to eq("standard")
       end
 
       it "converts private wikis to public wikis" do
-        post :downgrade
-        expect(wiki).to have_attributes(private: false)
+        post :downgrade, params: { wiki: wiki }
+        expect(wiki.reload).to have_attributes(private: false)
       end
 
       it ":back redirects to user profile page" do

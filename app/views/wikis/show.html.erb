@@ -5,7 +5,7 @@
       submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.username %>
     </small>
     <div class="media">
-      <p><%= @wiki.body %></p>
+      <p><%= markdown(@wiki.body) %></p>
     </div>
 
     <% if user_signed_in? %>

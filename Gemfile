@@ -34,6 +34,8 @@ gem 'faker'
 
 gem 'stripe'
 
+gem 'redcarpet'
+
 
 group :development do
  # Use sqlite3 as the development database for Active Record

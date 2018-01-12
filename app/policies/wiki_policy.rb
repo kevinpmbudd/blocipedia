@@ -39,7 +39,7 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.admin? || user.premium?
+      if user && (user.admin? || user.premium?)
         scope.all
       else
         scope.where(private: false)

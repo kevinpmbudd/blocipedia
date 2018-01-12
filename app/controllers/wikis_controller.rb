@@ -67,7 +67,7 @@ class WikisController < ApplicationController
   end
 
   def private_wiki?
-    @wiki && @wiki.private
+    @wiki && @wiki.private?
   end
 
   def authorize_user

@@ -39,10 +39,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def downgrade
-    current_user.update_attribute(:role, "standard")
+    current_user.update_attributes!(:role => "standard")
     @wikis = Wiki.where(user: current_user)
-    @wikis.each { |wiki| wiki.update_attribute(:private, false) }
-    redirect_back(fallback_location: :root)
+    @wikis.each {|wiki| wiki.update_attributes!(:private => false)}
+    redirect_to(edit_user_registration_path)
   end
 
   # protected

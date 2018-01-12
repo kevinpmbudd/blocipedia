@@ -1,5 +1,14 @@
 <tr>
   <td><%= link_to wiki.title, wiki %></td>
+  <% if current_user && (current_user.admin? || current_user.premium?) %>
+    <td class="text-center">
+      <% if wiki.private? %>
+        <%= "private" %>
+      <% else %>
+        <%= "public" %>
+      <% end %>
+    </td>
+  <% end %>
   <% if user_signed_in? %>
     <td class="text-center"><%= link_to "edit", edit_wiki_path(wiki) %></td>
     <td class="text-center"><%= link_to "delete", wiki, method: :delete, data: { confirm: 'Delete this wiki?' } %></td>
