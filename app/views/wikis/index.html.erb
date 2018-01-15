@@ -6,7 +6,7 @@
     </table>
 
     <div class="text-center">
-      <% if policy(@wikis).new? %>
+      <% if current_user %>
         <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
       <% end %>
     </div>

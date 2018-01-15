@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     post '/downgrade' => 'users/registrations#downgrade', as: :downgrade
   end
 
-  resources :wikis
+  resources :wikis do
+    resources :collaborators, only: :create
+  end
 
   resources :charges, only: [:new, :create]
 

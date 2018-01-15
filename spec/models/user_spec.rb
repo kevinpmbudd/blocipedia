@@ -8,7 +8,9 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:username) }
   it { should validate_length_of(:username).is_at_least(1) }
 
-  it { should have_many(:wikis) }
+  # it { should have_many(:wikis) }
+
+  it { should have_many(:wikis).through(:collaborators) }
 
   describe "attributes" do
     it "should have username and email attributes" do

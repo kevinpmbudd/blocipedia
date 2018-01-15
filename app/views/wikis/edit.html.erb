@@ -3,5 +3,20 @@
     <h2>Edit Wiki</h2>
 
     <%= render partial: 'form', locals: { wiki: @wiki } %>
+
+    <% if @wiki.private? %>
+      <h4>Add Collaborators to the <%= @wiki.title %> wiki</h4>
+      <%= form_tag wiki_collaborators_path(@wiki) do %>
+        <table class="table table-striped table-bordered">
+          <th>Username</th>
+          <th>Email</th>
+          <th>Give Access</th>
+          <% @users.each do |user| %>
+            <%= render partial: 'collaborators/collaborator', locals: { wiki: @wiki, user: user } %>
+          <% end %>
+        </table>
+        <%= submit_tag "Share Wiki", class: 'btn btn-primary'%>
+      <% end %>
+    <% end %>
   </div>
 </div>

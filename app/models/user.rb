@@ -8,9 +8,11 @@ class User < ApplicationRecord
 
   def downgrade_role
     self.role = :standard
-  end 
+  end
 
-  has_many :wikis, dependent: :destroy
+  has_many :collaborators
+  has_many :wikis, dependent: :destroy, through: :collaborators
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,

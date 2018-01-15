@@ -32,6 +32,7 @@ class WikisController < ApplicationController
   def edit
     @wiki = Wiki.find_by_id( params[:id] )
     authorize @wiki
+    @users = User.all 
   end
 
   def update
