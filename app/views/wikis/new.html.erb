@@ -1,7 +1,14 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h2 class="text-center">New Wiki</h2>
+  <div class="col-md-offset-1">
+    <div class="col-md-5">
+      <h2 class="text-center">New Wiki</h2>
 
-    <%= render partial: 'form', locals: { wiki: @wiki } %>
+      <%= render partial: 'form', locals: { wiki: @wiki } %>
+    </div>
+    <div class="col-md-5">
+      <h2 class="text-center">Preview</h2>
+      <div id="epiceditor"></div>
+    </div>
+
   </div>
 </div>

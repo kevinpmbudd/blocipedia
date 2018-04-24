@@ -29,5 +29,24 @@ users = User.all
   )
 end
 
+4.times do
+  Wiki.create!(
+    title: Faker::Beer.unique.style,
+    body: Faker::Hipster.paragraph,
+    private: true,
+    user: users.sample
+  )
+end
+private_wikis = Wiki.where(private: true)
+
+
+6.times do
+  Collaborator.create!(
+    user_id: users.sample.id,
+    wiki_id: private_wikis.sample.id
+  )
+end
+
 puts "#{User.count} users created"
 puts "#{Wiki.count} (public) wikis created"
+puts "#{Collaborator.count} collaborators created"
